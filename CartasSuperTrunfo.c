@@ -18,11 +18,6 @@ int main() {
     int pontosTuristicos2;
     float area2, pib2, densidadePopulacional2, pibPerCapita2,superPoder2, inversoDaDensidade2;
 
-    // Inicialização das variáveis de comparação
-
-    int comparacaoPopulacao, comparacaoArea, comparacaoPib, comparacaoPontosTuristicos, comparacaoDensidade,
-    comparacaoPibPerCapita, comparacaoSuperPoder;
-
     // Solicitação de informações para a carta 01
     printf("Desafio Super Trunfo - Países\n");
     printf("Cadastro da carta 01\n");
@@ -88,16 +83,6 @@ int main() {
     inversoDaDensidade2 = 1 / densidadePopulacional2;
     superPoder2 = (float) populacao2 + area2 + pib2 + pontosTuristicos2 + pibPerCapita2 + inversoDaDensidade2;
 
-    //Cálculo das comparações entre as cartas
-
-    comparacaoPopulacao = populacao > populacao2;
-    comparacaoArea = area > area2;
-    comparacaoPib = pib > pib2;
-    comparacaoPontosTuristicos = pontosTuristicos > pontosTuristicos2;
-    comparacaoDensidade = densidadePopulacional < densidadePopulacional2; // menor densidade é melhor
-    comparacaoPibPerCapita = pibPerCapita > pibPerCapita2;
-    comparacaoSuperPoder = superPoder > superPoder2;
-
     // Informações da carta 01
     printf("\nInformações da carta 01:\n");
     printf("Estado: %s\n", estado);
@@ -126,16 +111,17 @@ int main() {
     printf("Inverso da Densidade: %.2f\n", inversoDaDensidade2);
     printf("SuperPoder: %.2f\n", superPoder2);
 
-    // Comparação das cartas
-
-    printf("\nComparação das cartas:\n");
-    printf("População: Carta 01 venceu?: %d\n", comparacaoPopulacao);
-    printf("Área: Carta 01 venceu?: %d\n", comparacaoArea);
-    printf("PIB: Carta 01 venceu?: %d\n", comparacaoPib);
-    printf("Número de Pontos Turísticos: Carta 01 venceu?: %d\n", comparacaoPontosTuristicos);
-    printf("Densidade Populacional: Carta 01 venceu?: %d\n", comparacaoDensidade);
-    printf("PIB per capita: Carta 01 venceu?: %d\n", comparacaoPibPerCapita);
-    printf("SuperPoder: Carta 01 venceu?: %d\n", comparacaoSuperPoder);
+    // Comparação das cartas (por enquanto apenas um exemplo simples)
+    printf("\nComparação das cartas (Atributo: Super Poder):\n");
+    printf("Carta 01 - %s (%s): %.2f\n", nomeDaCidade, estado, superPoder);
+    printf("Carta 02 - %s (%s): %.2f\n", nomeDaCidade2, estado2, superPoder2);
+    if (superPoder > superPoder2) {
+        printf("Resultado: Carta 01 (%s) venceu!\n,", nomeDaCidade);
+    } else if (superPoder < superPoder2) {
+        printf("Resultado: Carta 02 (%s) venceu!\n,", nomeDaCidade2);
+    } else {
+        printf("O atributo das cartas é igual!\n");
+    }
 
     return 0;
 }
