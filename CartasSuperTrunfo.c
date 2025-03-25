@@ -111,16 +111,73 @@ int main() {
     printf("Inverso da Densidade: %.2f\n", inversoDaDensidade2);
     printf("SuperPoder: %.2f\n", superPoder2);
 
-    // Comparação das cartas (por enquanto apenas um exemplo simples)
-    printf("\nComparação das cartas (Atributo: Super Poder):\n");
-    printf("Carta 01 - %s (%s): %.2f\n", nomeDaCidade, estado, superPoder);
-    printf("Carta 02 - %s (%s): %.2f\n", nomeDaCidade2, estado2, superPoder2);
-    if (superPoder > superPoder2) {
+    // Escolha do atributo para comparação
+    int escolha;
+    printf("\n Escolha o atributo para comparação: \n");
+    printf("1. População\n 2. Área\n 3. PIB\n 4. Número de Pontos Turísticos\n 5. PIB per capita\n 6. Densidade Populacional (menor valor ganha)\n 7. Super Poder\n");
+    scanf("%d", &escolha);
+
+    // Comparação com base na escolha do atributo
+    float atributo1, atributo2;
+    const char *atributoNome;
+
+    switch (escolha) {
+    case 1:
+        atributoNome = "População";
+        atributo1 = populacao;
+        atributo2 = populacao2;
+        break;
+    case 2:
+        atributoNome = "Área";
+        atributo1 = area;
+        atributo2 = area2;
+        break;
+    case 3:
+        atributoNome = "PIB";
+        atributo1 = pib;
+        atributo2 = pib2;
+        break;
+    case 4:
+        atributoNome = "Número de Pontos Turísticos";
+        atributo1 = pontosTuristicos;
+        atributo2 = pontosTuristicos2;
+        break;
+    case 5:
+        atributoNome = "PIB per capita";
+        atributo1 = pibPerCapita;
+        atributo2 = pibPerCapita2;
+        break;
+    case 6:
+        atributoNome = "Densidade Populacional";
+        atributo1 = inversoDaDensidade;             // aqui utilizo a variavel inversoDaDensidade pois o menor valor ganha
+        atributo2 = inversoDaDensidade2;
+        break;
+    case 7:
+        atributoNome = "Super Poder";
+        atributo1 = superPoder;
+        atributo2 = superPoder2;
+        break;
+    default:
+        printf("Escolha inválida!\n");
+        return 1;
+    }
+
+    // Comparação do atributo escolhido
+    printf("\nComparação das cartas (Atributo: %s):\n", atributoNome);
+    if (escolha == 6) {        // tive que colocar esse if pois a densidade não é um atributo que pode ser comparado junto com os demais, já que o menor valor é quem ganha
+        printf("Carta 01 - %s (%s): %.2f\n", nomeDaCidade, estado, densidadePopulacional);
+        printf("Carta 02 - %s (%s): %.2f\n", nomeDaCidade2, estado2, densidadePopulacional2);
+    } else {
+        printf("Carta 01 - %s (%s): %.2f\n", nomeDaCidade, estado, atributo1);
+        printf("Carta 02 - %s (%s): %.2f\n", nomeDaCidade2, estado2, atributo2);
+    }
+
+    if (atributo1 > atributo2) {
         printf("Resultado: Carta 01 (%s) venceu!\n,", nomeDaCidade);
-    } else if (superPoder < superPoder2) {
+    } else if (atributo1 < atributo2) {
         printf("Resultado: Carta 02 (%s) venceu!\n,", nomeDaCidade2);
     } else {
-        printf("O atributo das cartas é igual!\n");
+        printf("Resultado: Empate! O atributo das cartas é igual!\n");
     }
 
     return 0;
