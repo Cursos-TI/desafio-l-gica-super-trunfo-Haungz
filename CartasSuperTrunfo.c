@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
 
@@ -111,13 +112,13 @@ int main() {
     printf("Inverso da Densidade: %.2f\n", inversoDaDensidade2);
     printf("SuperPoder: %.2f\n", superPoder2);
 
-    // Escolha do atributo para comparação
+    // Escolha do primeiro atributo para comparação
     int escolha;
     printf("\n Escolha o atributo para comparação: \n");
     printf("1. População\n 2. Área\n 3. PIB\n 4. Número de Pontos Turísticos\n 5. PIB per capita\n 6. Densidade Populacional (menor valor ganha)\n 7. Super Poder\n");
     scanf("%d", &escolha);
 
-    // Comparação com base na escolha do atributo
+    // Mudança de variáveis de acordo com o atributo escolhido
     float atributo1, atributo2;
     const char *atributoNome;
 
@@ -159,11 +160,71 @@ int main() {
         break;
     default:
         printf("Escolha inválida!\n");
-        return 1;
+        exit(1);
     }
 
-    // Comparação do atributo escolhido
-    printf("\nComparação das cartas (Atributo: %s):\n", atributoNome);
+    // Mudança de variáveis de acordo com o segundo atributo escolhido
+    int escolha2;
+    printf("\n Escolha o segundo atributo para comparação: \n");
+    printf("Atenção: O segundo atributo não pode ser o mesmo que o primeiro!\n");
+    printf("1. População\n 2. Área\n 3. PIB\n 4. Número de Pontos Turísticos\n 5. PIB per capita\n 6. Densidade Populacional (menor valor ganha)\n 7. Super Poder\n");
+    scanf("%d", &escolha2);
+
+    // Comparação com base na escolha do segundo atributo
+    float segundoAtributo1, segundoAtributo2;
+    const char *atributoNome2;    
+
+    if (escolha == escolha2) {
+        printf("Escolha inválida! O segundo atributo não pode ser o mesmo que o primeiro!\n");
+        exit(1);
+    } else {
+        switch (escolha2) {
+        case 1:
+            atributoNome2 = "População";
+            segundoAtributo1 = populacao;
+            segundoAtributo2 = populacao2;
+            break;
+        case 2:
+            atributoNome2 = "Área";
+            segundoAtributo1 = area;
+            segundoAtributo2 = area2;
+            break;
+        case 3:
+            atributoNome2 = "PIB";
+            segundoAtributo1 = pib;
+            segundoAtributo2 = pib2;
+            break;
+        case 4:
+            atributoNome2 = "Número de Pontos Turísticos";
+            segundoAtributo1 = pontosTuristicos;
+            segundoAtributo2 = pontosTuristicos2;
+            break;
+        case 5:
+            atributoNome2 = "PIB per capita";
+            segundoAtributo1 = pibPerCapita;
+            segundoAtributo2 = pibPerCapita2;
+            break;
+        case 6:
+            atributoNome2 = "Densidade Populacional";
+            segundoAtributo1 = inversoDaDensidade;
+            segundoAtributo2 = inversoDaDensidade2;
+            break;
+        case 7:
+            atributoNome2 = "Super Poder";
+            segundoAtributo1 = superPoder;
+            segundoAtributo2 = superPoder2;
+            break;
+        default:
+            printf("Escolha inválida!\n");
+            exit(1);
+        }
+    }
+
+    // Declaração do vencedor da primeira rodada
+    int pontuacaoCarta1 = 0;
+    int pontuacaoCarta2 = 0;
+
+    printf("\nComparação das cartas (Primeiro atributo: %s):\n", atributoNome);
     if (escolha == 6) {        // tive que colocar esse if pois a densidade não é um atributo que pode ser comparado junto com os demais, já que o menor valor é quem ganha
         printf("Carta 01 - %s (%s): %.2f\n", nomeDaCidade, estado, densidadePopulacional);
         printf("Carta 02 - %s (%s): %.2f\n", nomeDaCidade2, estado2, densidadePopulacional2);
@@ -173,12 +234,46 @@ int main() {
     }
 
     if (atributo1 > atributo2) {
-        printf("Resultado: Carta 01 (%s) venceu!\n,", nomeDaCidade);
+        printf("Resultado: Carta 01 (%s) venceu a rodada!\n", nomeDaCidade);
+        pontuacaoCarta1++;
     } else if (atributo1 < atributo2) {
-        printf("Resultado: Carta 02 (%s) venceu!\n,", nomeDaCidade2);
+        printf("Resultado: Carta 02 (%s) venceu a rodada!\n", nomeDaCidade2);
+        pontuacaoCarta2++;
     } else {
         printf("Resultado: Empate! O atributo das cartas é igual!\n");
     }
 
+    // Comparação do segundo atributo escolhido
+    printf("\nComparação das cartas (Segundo atributo: %s):\n", atributoNome2);
+    if (escolha2 == 6) {
+        printf("Carta 01 - %s (%s): %.2f\n", nomeDaCidade, estado, densidadePopulacional);
+        printf("Carta 02 - %s (%s): %.2f\n", nomeDaCidade2, estado2, densidadePopulacional2);
+    } else {
+        printf("Carta 01 - %s (%s): %.2f\n", nomeDaCidade, estado, segundoAtributo1);
+        printf("Carta 02 - %s (%s): %.2f\n", nomeDaCidade2, estado2, segundoAtributo2);
+    }
+
+    if (segundoAtributo1 > segundoAtributo2) {
+        printf("Resultado: Carta 01 (%s) venceu a rodada!\n", nomeDaCidade);
+        pontuacaoCarta1++;
+    } else if (segundoAtributo1 < segundoAtributo2) {
+        printf("Resultado: Carta 02 (%s) venceu a rodada!\n", nomeDaCidade2);
+        pontuacaoCarta2++;
+    } else {
+        printf("Resultado: Empate! O atributo das cartas é igual!\n");
+    }
+
+    printf("\nResultado Final:\n");
+    printf("Carta 01 (%s) - Pontuação: %d\n", nomeDaCidade, pontuacaoCarta1);
+    printf("Carta 02 (%s) - Pontuação: %d\n", nomeDaCidade2, pontuacaoCarta2);
+
+    if (pontuacaoCarta1 > pontuacaoCarta2) {
+        printf("Carta 01 (%s) venceu a partida!\n", nomeDaCidade);
+    } else if (pontuacaoCarta1 < pontuacaoCarta2) {
+        printf("Carta 02 (%s) venceu a partida!\n", nomeDaCidade2);
+    } else {
+        printf("Empate! As cartas possuem a mesma pontuação!\n");
+    }
+    
     return 0;
 }
